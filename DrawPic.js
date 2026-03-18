@@ -14,14 +14,15 @@ class DrawPic {
     fill(this.bgColor, 100, 100);
     rect(this.x, this.y, this.w, this.h);
 
-    if (mouseX <= 0) {
-      mouseX = 300;
-    }
 
-    console.log(mouseX);
+    mouseX = mouseX > width ? width : mouseX;
+    mouseX = mouseX < width*0.25 ? width*0.25 : mouseX;
 
-    const mouseXFactor = map(mouseX, 0, this.w, 0.05, 1);
-    const mouseYFactor = map(mouseY, 0, this.h, 0.05, 1);
+    let mouseXFactor = map(mouseX, 0, this.w, 0.05, 1);
+    let mouseYFactor = map(mouseY, 0, this.h, 0.05, 1);
+    
+
+    console.log(mouseXFactor);
 
     const tileWidth = this.w / this.img.width;
     const tileHeight = this.h / this.img.height;
@@ -46,7 +47,11 @@ class DrawPic {
 
         let r2 = 1.1284 * sqrt(tileWidth * tileWidth * (1 - greyscale / 255));
 
+
+
         r2 *= mouseXFactor * 20;
+
+        
 
         ellipse(posX, posY, r2, r2);
 
