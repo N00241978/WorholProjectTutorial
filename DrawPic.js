@@ -14,23 +14,21 @@ class DrawPic {
     fill(this.bgColor, 100, 100);
     rect(this.x, this.y, this.w, this.h);
 
+    let clampedMouseX = mouseX > width ? width : mouseX;
+    clampedMouseX = mouseX < width * 0.25 ? width * 0.25 : mouseX;
 
-    mouseX = mouseX > width ? width : mouseX;
-    mouseX = mouseX < width*0.25 ? width*0.25 : mouseX;
+    let mouseXFactor = map(clampedMouseX, 0, this.w, 0.05, 1);
+    let mouseYFactor = map(clampedMouseX, 0, this.h, 0.05, 1);
 
-    let mouseXFactor = map(mouseX, 0, this.w, 0.05, 1);
-    let mouseYFactor = map(mouseY, 0, this.h, 0.05, 1);
-    
-
-    console.log(mouseXFactor);
+    // console.log(mouseXFactor);
 
     const tileWidth = this.w / this.img.width;
     const tileHeight = this.h / this.img.height;
 
-    img.loadPixels(); // IMPORTANT: load once per frame
+    this.img.loadPixels(); 
 
-    for (let y = 0; y < this.img.height; y += this.step) {
-      for (let x = 0; x < this.img.width; x += this.step) {
+    for (let y = 0; y < this.img.height + 20; y += this.step) {
+      for (let x = 0; x < this.img.width + 10; x += this.step) {
         const index = (x + y * this.img.width) * 4;
 
         const r = this.img.pixels[index];
@@ -47,14 +45,9 @@ class DrawPic {
 
         let r2 = 1.1284 * sqrt(tileWidth * tileWidth * (1 - greyscale / 255));
 
+        // r2 *= mouseXFactor * 20;
 
-
-        r2 *= mouseXFactor * 20;
-
-        
-
-        ellipse(posX, posY, r2, r2);
-
+        ellipse(this.x + posX, this.y + posY, r2 * 20, r2 * 20);
       }
     }
   }
