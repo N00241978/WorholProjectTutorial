@@ -4,19 +4,14 @@ let img;
 let picAmount = 4;
 let picW = 250;
 let picH = 250;
-let fillOffset = 90;
+let fillOffset = 120;
 
 function preload() {
   img = loadImage("data/warholPic.jpg");
 }
 
 function setup() {
-  let bgColours = [
-    random(0, 360),
-    random(0, 360),
-    random(0, 360),
-    random(0, 360),
-  ];
+  let bgColours = [90, 180, 180, 90];
 
   createCanvas(500, 500);
   rectMode(CORNER);
@@ -61,8 +56,8 @@ function draw() {
 
     marilyn.render();
 
-    //break;
+    // break;
   }
 
-  noLoop();
+  // noLoop();
 }
