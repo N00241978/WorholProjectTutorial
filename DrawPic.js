@@ -14,18 +14,10 @@ class DrawPic {
     fill(this.bgColor, 100, 100);
     rect(this.x, this.y, this.w, this.h);
 
-    let clampedMouseX = mouseX > width ? width : mouseX;
-    clampedMouseX = mouseX < width * 0.25 ? width * 0.25 : mouseX;
-
-    let mouseXFactor = map(clampedMouseX, 0, this.w, 0.05, 1);
-    let mouseYFactor = map(clampedMouseX, 0, this.h, 0.05, 1);
-
-    // console.log(mouseXFactor);
-
     const tileWidth = this.w / this.img.width;
     const tileHeight = this.h / this.img.height;
 
-    this.img.loadPixels(); 
+    this.img.loadPixels();
 
     for (let y = 0; y < this.img.height + 20; y += this.step) {
       for (let x = 0; x < this.img.width + 10; x += this.step) {
@@ -44,8 +36,6 @@ class DrawPic {
         noStroke();
 
         let r2 = 1.1284 * sqrt(tileWidth * tileWidth * (1 - greyscale / 255));
-
-        // r2 *= mouseXFactor * 20;
 
         ellipse(this.x + posX, this.y + posY, r2 * 20, r2 * 20);
       }
